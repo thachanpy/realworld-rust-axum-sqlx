@@ -4,6 +4,7 @@ use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
 use axum::Json;
 use serde::Serialize;
+use tokio::task::JoinError;
 use tracing::error;
 
 #[derive(Serialize)]
@@ -87,6 +88,12 @@ impl From<PutObjectError> for AppError {
 
 impl From<SendMessageError> for AppError {
   fn from(_: SendMessageError) -> Self {
+    AppError::SomethingWentWrong
+  }
+}
+
+impl From<JoinError> for AppError {
+  fn from(_: JoinError) -> Self {
     AppError::SomethingWentWrong
   }
 }

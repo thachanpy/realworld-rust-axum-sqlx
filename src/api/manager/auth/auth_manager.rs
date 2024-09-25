@@ -122,13 +122,7 @@ impl AuthManager for AuthManagerImpl {
       JobUserMessage::new(user_id, true),
     )
     .to_value();
-    let sqs_producer = self.sqs_producer.clone();
-    tokio::spawn(async move {
-      sqs_producer
-        .send(JobKind::Local.as_str(), message)
-        .await
-        .unwrap();
-    });
+    let _ = self.sqs_producer.send(JobKind::Local.as_str(), message).await;
   }
 
   async fn generate_tokens(&self, user_id: Uuid, user_role: UserRole) -> (String, String) {

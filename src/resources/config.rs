@@ -1,7 +1,6 @@
 use config::builder::DefaultState;
 use config::{Config, ConfigBuilder, ConfigError, Environment, File, FileFormat};
 use jsonwebtoken::Algorithm;
-use mockall::predicate::path::exists;
 use regex::Regex;
 use serde::Deserialize;
 use std::collections::HashMap;
