@@ -1,0 +1,7 @@
+FROM flyway/flyway:10
+
+WORKDIR /flyway/sql
+
+COPY sql .
+
+ENTRYPOINT ["/flyway/flyway", "migrate"]
